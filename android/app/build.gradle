@@ -62,9 +62,10 @@ dependencies {
 
     implementation 'fm.jiecao:jiecaovideoplayer:5.5.4'
     api project(':middle')
-
-    if (versionProps['flutter_enable'].toString().toBoolean()) {
-        api project(':flutter_lib')
+    api project(':flutter_lib')
+    if (!versionProps['flutter_enable'].toString().toBoolean()) {
+        implementation fileTree(dir: 'flutterlibs', include: ['*'])
+        implementation 'io.flutter:flutter_embedding_debug:1.0.0-3e6d6bc612fde37ad06b30263f7700e523f0a0be'
     }
 }
 

@@ -11,5 +11,5 @@ if (versionProps['flutter_enable'].toString().toBoolean()) {
     setBinding(new Binding([gradle:this]))
     evaluate(new File('..', '.android/include_flutter.groovy'))
 } else {
-    include ':app', ':common', ':middle'
+    include ':app', ':common', ':middle', ":flutter_lib"
 }

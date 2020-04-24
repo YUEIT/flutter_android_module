@@ -37,6 +37,10 @@ android {
     }
 }
 
+def versionPropsFile = file("../version.properties")
+Properties versionProps = new Properties()
+versionProps.load(new FileInputStream(versionPropsFile))
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation rootProject.ext.androidx["junit"]
@@ -55,6 +59,11 @@ dependencies {
     kapt rootProject.ext.dependencies["arouter-compiler"]
 
     api project(':middle')
-    api project(':flutter_boost')
-    api project(':flutter')
+    if (versionProps['flutter_enable'].toString().toBoolean()) {
+        api project(':flutter_boost')
+        api project(':flutter')
+    } else {
+        implementation fileTree(dir: 'libs', include: ['*'])
+        implementation 'io.flutter:flutter_embedding_debug:1.0.0-3e6d6bc612fde37ad06b30263f7700e523f0a0be'
+    }
 }

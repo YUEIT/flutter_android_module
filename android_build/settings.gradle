@@ -1,0 +1,8 @@
+def dirPropsFile = file("local.properties")
+Properties dirProps = new Properties()
+dirProps.load(new FileInputStream(dirPropsFile))
+
+include ':app', ':flutter_boost'
+project(':flutter_boost').projectDir = new File(dirProps['flutter_boots.dir'].toString())
+setBinding(new Binding([gradle:this]))
+evaluate(new File('..', '.android/include_flutter.groovy'))
