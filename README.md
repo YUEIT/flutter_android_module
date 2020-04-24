@@ -1,7 +1,7 @@
 # flutter 工程结构
 
     flutter sdk 1.12.17版本
-    
+
     flutter 模式下直接编译运行
         注意，如果修改过android gradle配置项，可能会报一些奇怪的错误，这时如果在android下编译正常的话，删除掉build目录后重新编译。
             如果发现flutter代码未生效再点下运行，flutter hot Reload.
