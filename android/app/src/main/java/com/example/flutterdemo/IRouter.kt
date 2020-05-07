@@ -1,4 +1,4 @@
-package com.example.flutterandroidmodule
+package com.example.flutterdemo
 
 /**
  * Description :

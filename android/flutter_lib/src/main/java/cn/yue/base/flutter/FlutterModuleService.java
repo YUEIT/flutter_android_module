@@ -21,11 +21,11 @@ public class FlutterModuleService implements IFlutterModule {
 
     @Override
     public void init(Context context) {
+        Log.d("luobiao", "init");
         INativeRouter router = new INativeRouter() {
             @Override
             public void openContainer(Context context, String url, Map<String, Object> urlParams, int requestCode, Map<String, Object> exts) {
                 String  assembleUrl=Utils.assembleUrl(url,urlParams);
-                Log.d("luobiao", "openContainer: " + urlParams);
                 PlatformRouter.getInstance().build(url)
                         .withMap(urlParams)
                         .navigation((Activity) context, requestCode);

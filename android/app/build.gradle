@@ -7,7 +7,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion rootProject.ext.android.targetSdkVersion
     defaultConfig {
-        applicationId "cn.yue.base.test"
+        applicationId "com.example.flutterdemo"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         multiDexEnabled true
@@ -39,9 +39,9 @@ android {
     }
 }
 
-def versionPropsFile = file("../version.properties")
-Properties versionProps = new Properties()
-versionProps.load(new FileInputStream(versionPropsFile))
+def localPropsFile = file("../local.properties")
+Properties localProps = new Properties()
+localProps.load(new FileInputStream(localPropsFile))
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -63,7 +63,7 @@ dependencies {
     implementation 'fm.jiecao:jiecaovideoplayer:5.5.4'
     api project(':middle')
     api project(':flutter_lib')
-    if (!versionProps['flutter_enable'].toString().toBoolean()) {
+    if (!localProps['flutter_enable'].toString().toBoolean()) {
         implementation fileTree(dir: 'flutterlibs', include: ['*'])
         implementation 'io.flutter:flutter_embedding_debug:1.0.0-3e6d6bc612fde37ad06b30263f7700e523f0a0be'
     }

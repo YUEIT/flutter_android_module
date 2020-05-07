@@ -1,4 +1,4 @@
-package com.example.flutterandroidmodule
+package com.example.flutterdemo
 
 import android.view.View
 import cn.yue.base.common.activity.BaseActivity

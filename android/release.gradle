@@ -7,6 +7,10 @@ def versionPropsFile = file("../version.properties")
 Properties versionProps = new Properties()
 versionProps.load(new FileInputStream(versionPropsFile))
 
+def localPropsFile = file("../local.properties")
+Properties localProps = new Properties()
+localProps.load(new FileInputStream(localPropsFile))
+
 android {
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
@@ -66,7 +70,7 @@ android {
             manifestPlaceholders = [UMENG_APPKEY_VALUE: umeng_key_debug]
             buildConfigField("boolean", "DEBUG_MODE", versionProps['debug_mode'].toString())
             buildConfigField("boolean", "LOG_MODE", versionProps['log_mode'].toString())
-            buildConfigField("boolean", "FLUTTER_ENABLE", versionProps['flutter_enable'].toString())
+            buildConfigField("boolean", "FLUTTER_ENABLE", localProps['flutter_enable'].toString())
         }
     }
 

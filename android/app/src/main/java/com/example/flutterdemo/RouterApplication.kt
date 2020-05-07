@@ -1,8 +1,7 @@
-package com.example.flutterandroidmodule
+package com.example.flutterdemo
 
 import cn.yue.base.flutter.FlutterModuleService
 import cn.yue.base.middle.init.MiddleApplication
-import cn.yue.base.middle.module.IAppModule
 import cn.yue.base.middle.module.IFlutterModule
 import cn.yue.base.middle.module.ModuleType
 import cn.yue.base.middle.module.manager.ModuleManager

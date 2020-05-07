@@ -3,6 +3,7 @@ package cn.yue.base.flutter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -51,6 +52,7 @@ public class FlutterRouter implements INavigation {
         if (routerCard == null) {
             return;
         }
+        Log.d("luobiao", "requestCode" + routerCard);
         Intent intent = BoostFlutterActivity.withNewEngine().url(routerCard.getPactUrl()).params(getParams())
                 .backgroundMode(BoostFlutterActivity.BackgroundMode.opaque).build(context);
         if (requestCode > 0) {

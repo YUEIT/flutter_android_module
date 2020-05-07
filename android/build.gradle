@@ -28,10 +28,11 @@ allprojects {
     }
 }
 
-def versionPropsFile = file("version.properties")
-Properties versionProps = new Properties()
-versionProps.load(new FileInputStream(versionPropsFile))
-if (versionProps['flutter_enable'].toString().toBoolean()) {
+def localPropsFile = file("local.properties")
+Properties localProps = new Properties()
+localProps.load(new FileInputStream(localPropsFile))
+
+if (localProps['flutter_enable'].toString().toBoolean()) {
     rootProject.buildDir = '../build'
     subprojects {
         project.buildDir = "${rootProject.buildDir}/${project.name}"

@@ -37,9 +37,9 @@ android {
     }
 }
 
-def versionPropsFile = file("../version.properties")
-Properties versionProps = new Properties()
-versionProps.load(new FileInputStream(versionPropsFile))
+def localPropsFile = file("../local.properties")
+Properties localProps = new Properties()
+localProps.load(new FileInputStream(localPropsFile))
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -59,7 +59,7 @@ dependencies {
     kapt rootProject.ext.dependencies["arouter-compiler"]
 
     api project(':middle')
-    if (versionProps['flutter_enable'].toString().toBoolean()) {
+    if (localProps['flutter_enable'].toString().toBoolean()) {
         api project(':flutter_boost')
         api project(':flutter')
     } else {

@@ -337,8 +337,22 @@ public class RouterCard implements INavigation, Parcelable{
         return this;
     }
 
+    @Override
     public String toString() {
-        return "FRouter{uri=" + this.uri + ", tag=" + this.tag + ", mBundle=" + this.mBundle + ", flags=" + this.flags + ", timeout=" + this.timeout + ", provider=" + ", greenChannel=" + ", enterAnim=" + this.enterAnim + ", exitAnim=" + this.exitAnim + "}\n" + super.toString();
+        return "RouterCard{" +
+                "uri=" + uri +
+                ", tag=" + tag +
+                ", mBundle=" + mBundle +
+                ", pactUrl='" + pactUrl + '\'' +
+                ", path='" + path + '\'' +
+                ", flags=" + flags +
+                ", timeout=" + timeout +
+                ", enterAnim=" + enterAnim +
+                ", exitAnim=" + exitAnim +
+                ", transition=" + transition +
+                ", isInterceptLogin=" + isInterceptLogin +
+                ", navigation=" + navigation +
+                '}';
     }
 
     public RouterCard setInterceptLogin() {
