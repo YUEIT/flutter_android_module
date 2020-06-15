@@ -28,11 +28,7 @@ allprojects {
     }
 }
 
-def localPropsFile = file("local.properties")
-Properties localProps = new Properties()
-localProps.load(new FileInputStream(localPropsFile))
-
-if (localProps['flutter_enable'].toString().toBoolean()) {
+if (rootProject.ext.flutter["enable"]) {
     rootProject.buildDir = '../build'
     subprojects {
         project.buildDir = "${rootProject.buildDir}/${project.name}"

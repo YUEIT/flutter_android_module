@@ -12,5 +12,5 @@
         android:layout_gravity="center"
         android:textColor="#333333"
         android:textSize="18sp"
-        android:text="jump flutter page"/>
+        android:text="跳转到Flutter"/>
 </LinearLayout>

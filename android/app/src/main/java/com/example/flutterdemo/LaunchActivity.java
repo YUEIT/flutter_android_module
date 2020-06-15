@@ -1,5 +1,6 @@
 package com.example.flutterdemo;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import cn.yue.base.common.activity.BaseActivity;
+import cn.yue.base.common.activity.PermissionCallBack;
 import cn.yue.base.middle.router.FRouter;
 
 /**
@@ -68,8 +70,9 @@ public class LaunchActivity extends BaseActivity {
                 FRouter.getInstance()
                         .build("/app/flutterJump")
                         .navigation(LaunchActivity.this);
+                finish();
             }
-        },2000);
+        },500);
 
     }
 

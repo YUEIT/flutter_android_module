@@ -37,10 +37,6 @@ android {
     }
 }
 
-def localPropsFile = file("../local.properties")
-Properties localProps = new Properties()
-localProps.load(new FileInputStream(localPropsFile))
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation rootProject.ext.androidx["junit"]
@@ -59,11 +55,14 @@ dependencies {
     kapt rootProject.ext.dependencies["arouter-compiler"]
 
     api project(':middle')
-    if (localProps['flutter_enable'].toString().toBoolean()) {
+    
+    if (rootProject.ext.flutter["enable"]) {
+        // pub 会下载到本地
         api project(':flutter_boost')
         api project(':flutter')
     } else {
-        implementation fileTree(dir: 'libs', include: ['*'])
-        implementation 'io.flutter:flutter_embedding_debug:1.0.0-3e6d6bc612fde37ad06b30263f7700e523f0a0be'
+        // 各插件编译生成的aar 放入libs中，或者放入远程仓库
+        api fileTree(dir: 'libs', include: ['*'])
+        implementation rootProject.ext.flutter['flutter-embedding']
     }
 }

@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -54,7 +56,11 @@ public class PhoneUtils {
     @SuppressLint("HardwareIds")
     public static String getIMEI() {
         TelephonyManager tm = (TelephonyManager) Utils.getContext().getSystemService(Context.TELEPHONY_SERVICE);
-        return tm != null ? tm.getDeviceId() : null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            return tm != null ? tm.getImei() : null;
+        } else {
+            return tm != null ? tm.getDeviceId() : null;
+        }
     }
 
     /**
@@ -386,5 +392,9 @@ public class PhoneUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getAndroidId() {
+       return Settings.System.getString(Utils.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 }

@@ -52,4 +52,22 @@ ext {
             'systembartint'                        : 'com.readystatesoftware.systembartint:systembartint:1.0.3',
             'tkrefreshlayout'                      : 'com.lcodecorex:tkrefreshlayout:1.0.7',
     ]
+
+    def localPropsFile = file("../.android/local.properties")
+    if (!localPropsFile.exists()) {
+        localPropsFile = file("local.properties")
+    }
+    Properties localProps = new Properties()
+    localProps.load(new FileInputStream(localPropsFile))
+
+    //版本在 flutter/bin/internal/engine.version 中提供
+    String engineVersion = "3e6d6bc612fde37ad06b30263f7700e523f0a0be"
+
+    flutter = [
+            "enable"                               : localProps['flutter.enable'].toString().toBoolean(),
+            "flutter-boots-dir"                    : localProps['flutter_boots.dir'].toString(),
+            "flutter-embedding"                    : "io.flutter:flutter_embedding_debug:1.0.0-$engineVersion"
+    ]
 }
+
+

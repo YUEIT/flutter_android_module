@@ -1,10 +1,8 @@
-def localPropsFile = file("local.properties")
-Properties localProps = new Properties()
-localProps.load(new FileInputStream(localPropsFile))
+apply from : 'config.gradle'
 
-if (localProps['flutter_enable'].toString().toBoolean()) {
+if (ext.flutter["enable"]) {
     include ':app', ':common', ':middle' ,':flutter_lib', ':flutter_boost'
-    project(':flutter_boost').projectDir = new File(localProps['flutter_boots.dir'].toString())
+    project(':flutter_boost').projectDir = new File(ext.flutter["flutter-boots-dir"])
     setBinding(new Binding([gradle:this]))
     evaluate(new File('..', '.android/include_flutter.groovy'))
 } else {

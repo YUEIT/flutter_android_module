@@ -52,10 +52,9 @@ public class FlutterRouter implements INavigation {
         if (routerCard == null) {
             return;
         }
-        Log.d("luobiao", "requestCode" + routerCard);
         Intent intent = BoostFlutterActivity.withNewEngine().url(routerCard.getPactUrl()).params(getParams())
                 .backgroundMode(BoostFlutterActivity.BackgroundMode.opaque).build(context);
-        if (requestCode > 0) {
+        if (requestCode >= 0) {
             context.startActivityForResult(intent, requestCode);
         } else {
             context.startActivity(intent);

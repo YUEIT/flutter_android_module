@@ -12,16 +12,19 @@ import com.idlefish.flutterboost.interfaces.INativeRouter;
 
 import java.util.Map;
 
+import cn.yue.base.flutter.plugin.CustomPlugin;
+import cn.yue.base.flutter.plugin.LogPlugin;
 import cn.yue.base.middle.router.INavigation;
 import cn.yue.base.middle.router.PlatformRouter;
 import cn.yue.base.middle.module.IFlutterModule;
 import io.flutter.embedding.android.FlutterView;
+import io.flutter.embedding.engine.FlutterEngine;
+import io.flutter.embedding.engine.plugins.PluginRegistry;
 
 public class FlutterModuleService implements IFlutterModule {
 
     @Override
     public void init(Context context) {
-        Log.d("luobiao", "init");
         INativeRouter router = new INativeRouter() {
             @Override
             public void openContainer(Context context, String url, Map<String, Object> urlParams, int requestCode, Map<String, Object> exts) {
@@ -42,6 +45,22 @@ public class FlutterModuleService implements IFlutterModule {
             @Override
             public void onEngineCreated() {
 
+                FlutterEngine flutterEngine = FlutterBoost.instance().engineProvider();
+
+//                ShimPluginRegistry shimPluginRegistry = new ShimPluginRegistry(flutterEngine);
+//                io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin.registerWith(shimPluginRegistry.registrarFor("io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin"));
+//                io.github.ponnamkarthik.toast.fluttertoast.FluttertoastPlugin.registerWith(shimPluginRegistry.registrarFor("io.github.ponnamkarthik.toast.fluttertoast.FluttertoastPlugin"));
+
+                PluginRegistry pluginRegistry =  flutterEngine.getPlugins();
+
+//                pluginRegistry.add(new io.flutter.plugins.imagepicker.ImagePickerPlugin());
+//                pluginRegistry.add(new io.flutter.plugins.pathprovider.PathProviderPlugin());
+//                pluginRegistry.add(new io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin());
+//                pluginRegistry.add(new com.tekartik.sqflite.SqflitePlugin());
+//                pluginRegistry.add(new io.flutter.plugins.connectivity.ConnectivityPlugin());
+
+                pluginRegistry.add(new CustomPlugin());
+                pluginRegistry.add(new LogPlugin());
             }
 
             @Override
@@ -77,7 +96,6 @@ public class FlutterModuleService implements IFlutterModule {
                 .lifecycleListener(boostLifecycleListener)
                 .build();
         FlutterBoost.instance().init(platform);
-
     }
 
     @Override
