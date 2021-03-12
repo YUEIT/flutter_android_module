@@ -33,26 +33,47 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*'])
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    api project(':flutter_boost')
-    api project(':flutter')
 }
 
 /**
- *
+ * copy flutter 编译产物到 assets目录下
  */
-task copyBuildFile {
+task copyBuildFlutterFile {
     doLast {
+        print("copy from flutter file into assets dir")
         copy {
-            from('../../build/flutter/intermediates/flutter/debug')
+            from('../../build/flutter/intermediates/flutter/release')
                     .into('src/main/assets')
         }
     }
 }
 
+/**
+ * copy flutter生成的aar 到android/app/flutter_aar目录下
+ */
+task copyBuildAarFile {
+    doLast {
+        print("copy from flutter aar into android/flutter_lib/libs dir")
+        copy {
+            from('../../build/flutter/intermediates/flutter/release')
+                    .into('../../android/flutter_lib/libs')
+        }
+    }
+}
+
+/**
+ * 没什么用，统一打包
+ */
+task buildFlutter {
+    doLast {
+        print("build flutter successful！")
+    }
+}
+
 afterEvaluate {
-    tasks.getByName("assembleRelease").dependsOn copyBuildFile
+    tasks.getByName("assembleRelease").dependsOn copyBuildFlutterFile
+    copyBuildAarFile.dependsOn tasks.getByName("assembleRelease")
+    buildFlutter.dependsOn copyBuildAarFile
 }
 // build/flutter/intermediates/flutter/debug/flutter_assets
 // build/flutter_boost/outputs/aar/flutter_boots.debug.aar

@@ -23,6 +23,7 @@
 # Flutter/Dart/Pub related
 **/doc/api/
 .dart_tool/
+.idea
 .flutter-plugins
 .flutter-plugins-dependencies
 .packages
@@ -31,6 +32,7 @@
 /build/
 android/.idea
 android/.gradle
+android/app/build/
 # Web related
 lib/generated_plugin_registrant.dart
 

@@ -59,10 +59,10 @@ dependencies {
     if (rootProject.ext.flutter["enable"]) {
         // pub 会下载到本地
         api project(':flutter_boost')
-        api project(':flutter')
+//        api project(':flutter')
     } else {
         // 各插件编译生成的aar 放入libs中，或者放入远程仓库
         api fileTree(dir: 'libs', include: ['*'])
-        implementation rootProject.ext.flutter['flutter-embedding']
+        api rootProject.ext.flutter['flutter-embedding']
     }
 }

@@ -1,8 +1,8 @@
 apply from: rootProject.getRootDir().getAbsolutePath() + "/release.gradle"
+apply from: rootProject.getRootDir().getAbsolutePath() + "/flutter.gradle"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-//apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion rootProject.ext.android.targetSdkVersion
@@ -39,6 +39,8 @@ android {
     }
 }
 
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation rootProject.ext.androidx["junit"]
@@ -57,11 +59,9 @@ dependencies {
     kapt rootProject.ext.dependencies["arouter-compiler"]
 
     implementation 'fm.jiecao:jiecaovideoplayer:5.5.4'
+
     api project(':middle')
     api project(':flutter_lib')
-    if (!rootProject.ext.flutter["enable"]) {
-        implementation fileTree(dir: 'flutter_aar', include: ['*'])
-        implementation rootProject.ext.flutter["flutter-embedding"]
-    }
+
 }
 

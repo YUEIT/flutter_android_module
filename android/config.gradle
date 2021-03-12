@@ -53,7 +53,7 @@ ext {
             'tkrefreshlayout'                      : 'com.lcodecorex:tkrefreshlayout:1.0.7',
     ]
 
-    def localPropsFile = file("../.android/local.properties")
+    def localPropsFile = file("../local.properties")
     if (!localPropsFile.exists()) {
         localPropsFile = file("local.properties")
     }
@@ -65,7 +65,6 @@ ext {
 
     flutter = [
             "enable"                               : localProps['flutter.enable'].toString().toBoolean(),
-            "flutter-boots-dir"                    : localProps['flutter_boots.dir'].toString(),
             "flutter-embedding"                    : "io.flutter:flutter_embedding_debug:1.0.0-$engineVersion"
     ]
 }
