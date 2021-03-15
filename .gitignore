@@ -30,6 +30,7 @@
 .pub-cache/
 .pub/
 /build/
+build
 android/.idea
 android/.gradle
 android/app/build/

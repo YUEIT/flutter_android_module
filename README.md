@@ -31,7 +31,6 @@
     4、app AndroidMainfest 必须包含启动页LAUNCHER
     5、gradle版本，不支持高版本的，具体需要对应flutter版本
     6、flutter 工程目录下编译对native修改内容有时不会编译，需要重新clean后编译或者在native下编译后再编译
-    7、第一次打包编译，不会将flutter产物打包进apk，需要继续编译一次
 
 ##### flutter 编译控制
     目录下local.properties定义flutter.enable=true
