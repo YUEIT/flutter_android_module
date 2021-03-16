@@ -61,7 +61,7 @@ class ARouterInternalImpl extends ARouterInternal {
 
   dynamic findPageConfig(ARouteOption option) {
     final List<Map<String, dynamic>> pageConfigList =
-    innerRouterMap[option.urlpattern];
+    innerRouterMap[option.urlPattern];
     if (null != pageConfigList) {
       for (int i = 0; i < pageConfigList.length; i++) {
         final Map<String, dynamic> pageConfig = pageConfigList[i];

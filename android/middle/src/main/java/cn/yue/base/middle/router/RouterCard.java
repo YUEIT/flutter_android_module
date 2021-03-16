@@ -284,9 +284,20 @@ public class RouterCard implements INavigation, Parcelable{
         return this;
     }
 
-    public RouterCard withMap(Map<String, Object> map) {
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            putObject(entry.getKey(), entry.getValue());
+    public RouterCard withMap(@Nullable Map<String, Object> map) {
+        if (map != null) {
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                putObject(entry.getKey(), entry.getValue());
+            }
+        }
+        return this;
+    }
+
+    public RouterCard withMapString(@Nullable Map<String, String> map) {
+        if (map != null) {
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                withString(entry.getKey(), entry.getValue());
+            }
         }
         return this;
     }

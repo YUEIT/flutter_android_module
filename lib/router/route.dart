@@ -18,9 +18,10 @@ class ARouteAlias {
 }
 
 class ARouteOption {
-  String urlpattern;
+  String uniqueId;
+  String urlPattern;
   Map<String, dynamic> params;
-  ARouteOption(this.urlpattern, this.params);
+  ARouteOption(this.urlPattern, this.params, this.uniqueId);
 }
 
 enum ARouterResultState { FOUND, REDIRECT, NOT_FOUND }

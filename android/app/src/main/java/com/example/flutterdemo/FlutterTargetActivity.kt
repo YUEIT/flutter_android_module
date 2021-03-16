@@ -14,14 +14,14 @@ import java.lang.StringBuilder
 @Route(path = "/app/flutterTarget")
 class FlutterTargetActivity: BaseActivity(){
 
-    private lateinit var query: BundleMap
+    private lateinit var query: String
     private lateinit var param1: String
-    private lateinit var param2: MutableList<Int>
+    private lateinit var param2: String
     override fun initBundle(bundle: Bundle) {
         super.initBundle(bundle)
-        query = bundle.getSerializable("query") as BundleMap
-        param1 = bundle.getString("param1")!!
-        param2 = bundle.getIntegerArrayList("param2") as MutableList<Int>
+        query = bundle.getString("query")?: ""
+        param1 = bundle.getString("param1")?: ""
+        param2 = bundle.getString("param2")?: ""
     }
 
     override fun initView() {

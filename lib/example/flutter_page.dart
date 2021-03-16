@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_android_module/router/route.dart';
-import 'package:flutter_boost/flutter_boost.dart';
+import 'package:flutter_boost/boost_navigator.dart';
 import 'router_path.dart';
 
 
@@ -24,16 +24,16 @@ class FlutterPage extends StatelessWidget {
               onPressed: () {
 
                 //导航到新路由
-                FlutterBoost.singleton
-                    .open("native://app/flutterTarget", urlParams: <dynamic,dynamic>{
-                  "query": {"aaa": "bbb"},
+                BoostNavigator.of()
+                    .push("native://app/flutterTarget", arguments: <String,dynamic>{
+                  "query": "aaa",
                   "param1" : "test222222",
-                  "param2" :[1, 2, 3]
+                  "param2" : "[1, 2, 3]"
                 });
               },
               child: Text("Home Page"),
             ),
-            Text("url  "+ option.urlpattern,
+            Text("url  "+ option.urlPattern,
               textAlign: TextAlign.left,
             ),
             Text("params" + option.params.toString(),

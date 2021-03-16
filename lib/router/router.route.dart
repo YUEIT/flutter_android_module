@@ -6,23 +6,23 @@ import 'router_impl.dart';
 
 @ARouteRoot()
 class AppRoute {
-  static Widget getPage(String urlString, Map<dynamic, dynamic> params) {
+
+  static Widget getPage(String urlString, Map<dynamic, dynamic> params, String uniqueId) {
     Map<String, dynamic> query = Map();
-    params.forEach((key, value){
-      print(key + " , " + value);
-      query[key] = value;
-    });
+    if (params != null) {
+      params.forEach((key, value) {
+        query[key] = value;
+      });
+    }
+    return _getPage(urlString, query, uniqueId);
+  }
+
+  static Widget _getPage(String urlString, Map<String, dynamic> query, String uniqueId) {
     ARouterInternalImpl internal = ARouterInternalImpl();
-    ARouterResult routeResult = internal.findPage(ARouteOption(urlString, query), ARouteOption(urlString, query));
+    ARouterResult routeResult = internal.findPage(ARouteOption(urlString, query, uniqueId), ARouteOption(urlString, query, uniqueId));
     if(routeResult.state == ARouterResultState.FOUND) {
       return routeResult.widget;
     }
     return Text('NOT FOUND');
   }
 }
-
-//class MyRouteOption {
-//  String urlpattern;
-//  Map<String, dynamic> query;
-//  MyRouteOption(this.urlpattern, this.query );
-//}

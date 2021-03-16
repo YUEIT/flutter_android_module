@@ -7,13 +7,15 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.idlefish.flutterboost.containers.BoostFlutterActivity;
+import com.idlefish.flutterboost.FlutterBoost;
+import com.idlefish.flutterboost.containers.FlutterBoostActivity;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import cn.yue.base.middle.router.INavigation;
 import cn.yue.base.middle.router.RouterCard;
+import io.flutter.embedding.android.FlutterActivityLaunchConfigs;
 
 public class FlutterRouter implements INavigation {
 
@@ -34,12 +36,12 @@ public class FlutterRouter implements INavigation {
 
     @Override
     public void navigation(Context context) {
-        navigation((Activity)context, null, -1);
+        navigation((Activity)context, null, 0);
     }
 
     @Override
     public void navigation(@NonNull Context context, Class toActivity) {
-        navigation((Activity) context, toActivity, -1);
+        navigation((Activity) context, toActivity, 0);
     }
 
     @Override
@@ -52,21 +54,26 @@ public class FlutterRouter implements INavigation {
         if (routerCard == null) {
             return;
         }
-        Intent intent = BoostFlutterActivity.withNewEngine().url(routerCard.getPactUrl()).params(getParams())
-                .backgroundMode(BoostFlutterActivity.BackgroundMode.opaque).build(context);
-        if (requestCode >= 0) {
-            context.startActivityForResult(intent, requestCode);
-        } else {
-            context.startActivity(intent);
-        }
+        Intent intent = new FlutterBoostActivity.CachedEngineIntentBuilder(FlutterBoostActivity.class, FlutterBoost.ENGINE_ID)
+                .backgroundMode(FlutterActivityLaunchConfigs.BackgroundMode.opaque)
+                .destroyEngineWithActivity(false)
+                .uniqueId(getUniqueId())
+                .url(routerCard.getPactUrl())
+                .urlParams(getParams())
+                .build(context);
+        context.startActivity(intent);
     }
 
-    private Map getParams() {
-        Map<String, Object> map = new HashMap<>();
+    private HashMap<String, String> getParams() {
+        HashMap<String, String> map = new HashMap<>();
         for (String key : routerCard.getExtras().keySet()) {
             Object object = routerCard.getExtras().get(key);
-            map.put(key, object);
+            map.put(key, object.toString());
         }
         return map;
+    }
+
+    private String getUniqueId() {
+        return routerCard.getExtras().getString("uniqueId");
     }
 }

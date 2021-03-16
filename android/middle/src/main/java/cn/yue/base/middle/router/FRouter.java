@@ -155,7 +155,7 @@ public class FRouter implements INavigation, Parcelable {
 
 
     private void jumpToActivity(Context context) {
-        jumpToActivity(context, -1);
+        jumpToActivity(context, 0);
     }
 
     private void jumpToActivity(Context context, int requestCode) {
@@ -165,7 +165,7 @@ public class FRouter implements INavigation, Parcelable {
                 .with(routerCard.getExtras())
                 .withTransition(routerCard.getRealEnterAnim(), routerCard.getRealExitAnim())
                 .setTimeout(routerCard.getTimeout());
-        if (requestCode <= 0 || !(context instanceof Activity)) {
+        if (requestCode == 0 || !(context instanceof Activity)) {
             postcard.navigation(context);
         } else {
             postcard.navigation((Activity) context, requestCode);
@@ -177,7 +177,7 @@ public class FRouter implements INavigation, Parcelable {
     }
 
     private void jumpToFragment(Context context, Class toActivity) {
-        jumpToFragment(context, toActivity, -1);
+        jumpToFragment(context, toActivity, 0);
     }
 
     private void jumpToFragment(Context context, Class toActivity, int requestCode) {
@@ -194,7 +194,7 @@ public class FRouter implements INavigation, Parcelable {
         } else {
             intent.setClass(context, toActivity);
         }
-        if (requestCode <= 0) {
+        if (requestCode == 0) {
             context.startActivity(intent);
         } else {
             if (context instanceof Activity) {
