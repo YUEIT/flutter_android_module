@@ -135,7 +135,6 @@ public class RouterCard implements INavigation, Parcelable{
                 path = "/" + split[1];
             }
         }
-        Log.d("luobiao", "getPath: " + path);
         return path;
     }
 

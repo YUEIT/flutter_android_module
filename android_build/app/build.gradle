@@ -1,23 +1,20 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.kezong.fat-aar'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 29
-        multiDexEnabled true
+        targetSdkVersion 30
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+//            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled true
-    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -31,8 +28,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*'])
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 }
 
 /**
@@ -40,9 +35,16 @@ dependencies {
  */
 task copyBuildFlutterFile {
     doLast {
-        print("copy from flutter file into assets dir")
+        print("copy from flutter .so flie into libs dir")
+        delete('libs')
         copy {
-            from('../../build/flutter/intermediates/flutter/release')
+            from('../../build/app/intermediates/merged_native_libs/release/out/lib')
+                    .into('libs')
+        }
+        print("copy from flutter file into assets dir")
+        delete('src/main/assets')
+        copy {
+            from('../../build/app/intermediates/flutter/release')
                     .into('src/main/assets')
         }
     }
@@ -55,7 +57,7 @@ task copyBuildAarFile {
     doLast {
         print("copy from flutter aar into android/flutter_lib/libs dir")
         copy {
-            from('../../build/flutter/intermediates/flutter/release')
+            from('../../build/app/outputs/aar')
                     .into('../../android/flutter_lib/libs')
         }
     }
@@ -71,10 +73,9 @@ task buildFlutter {
 }
 
 afterEvaluate {
-    tasks.getByName("assembleRelease").dependsOn copyBuildFlutterFile
-    copyBuildAarFile.dependsOn tasks.getByName("assembleRelease")
+    tasks.getByName("bundleReleaseAar").dependsOn copyBuildFlutterFile
+    copyBuildAarFile.dependsOn tasks.getByName("bundleReleaseAar")
     buildFlutter.dependsOn copyBuildAarFile
 }
-// build/flutter/intermediates/flutter/debug/flutter_assets
-// build/flutter_boost/outputs/aar/flutter_boots.debug.aar
-// build/app/intermediates/merged_native_libs/debug/out/lib
+// build/app/intermediates/flutter/release
+// build/app/intermediates/merged_native_libs/release/out/lib

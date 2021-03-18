@@ -31,7 +31,7 @@ class FlutterPage extends StatelessWidget {
                   "param2" : "[1, 2, 3]"
                 });
               },
-              child: Text("Home Page"),
+              child: Text("To Home Page"),
             ),
             Text("url  "+ option.urlPattern,
               textAlign: TextAlign.left,

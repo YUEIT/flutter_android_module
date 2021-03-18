@@ -34,6 +34,9 @@ build
 android/.idea
 android/.gradle
 android/app/build/
+android_build/.idea
+android_build/.gradle
+android_build/.android
 # Web related
 lib/generated_plugin_registrant.dart
 

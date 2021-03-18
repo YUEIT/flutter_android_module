@@ -61,11 +61,11 @@ ext {
     localProps.load(new FileInputStream(localPropsFile))
 
     //版本在 flutter/bin/internal/engine.version 中提供
-    String engineVersion = "3e6d6bc612fde37ad06b30263f7700e523f0a0be"
+    String engineVersion = "40441def692f444660a11e20fac37af9050245ab"
 
     flutter = [
             "enable"                               : localProps['flutter.enable'].toString().toBoolean(),
-            "flutter-embedding"                    : "io.flutter:flutter_embedding_debug:1.0.0-$engineVersion"
+            "flutter-embedding"                    : "io.flutter:flutter_embedding_release:1.0.0-$engineVersion"
     ]
 }
 
